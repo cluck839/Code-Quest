@@ -1,3 +1,7 @@
+/*
+    Written by.: Christopher Luck
+    Purpose....: Problem 1 solution
+*/
 #include <iostream>
 #include <cstdlib>
 using namespace std;
