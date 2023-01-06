@@ -1,34 +1,33 @@
+/*
+ * Written by...: Christopher Luck
+ * Date Written.: 12/18/2022
+ * Purpose......: Problem 5 of the 2022 Lockheed Code Quest Competition
+ */
 #include <stdio.h>
-#include <malloc.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <string.h>
+
 typedef struct
 {
-    float planetTemperature;
-    bool presenceOfWater;
-    bool survivableSurface;
-    float circularOrbits;
+    double planetTemperature;
+    int presenceOfWater;
+    int survivableSurface;
+    double circularOrbits;
 } Planets;
 
 void checkPlanet(Planets *);
 void createPlanets(void);
-void extractPlanetData(char *,Planets *);
+
 int main()
 {
     int testCases;
     scanf("%d",&testCases);
 
-    /*if((planets = calloc(testCases, sizeof(Planets))) == NULL)
-    {
-        return 1;
-    }*/
     for(int i = 0;i < testCases;i++)
     {
         createPlanets();
     }
 
-    //free(planets);
     return 0;
 }
 
@@ -42,11 +41,11 @@ void checkPlanet(Planets *planet)
     {
         printf("The planet is too hot.\n");
     }
-    else if(planet->presenceOfWater == '0')
+    else if(planet->presenceOfWater == 0)
     {
         printf("The planet has no water.\n");
     }
-    else if(planet->survivableSurface == '0')
+    else if(planet->survivableSurface == 0)
     {
         printf("The planet has no magnetic field\n");
     }
@@ -64,50 +63,24 @@ void checkPlanet(Planets *planet)
 void createPlanets(void)
 {
     Planets planet;
-    char *pPlanet1;
-    if((pPlanet1 = calloc(100,sizeof(char))) == NULL)
-    {
-        printf("Not allocated.");
-        exit(-1);
-    }
-    scanf("%c",pPlanet1);
-    extractPlanetData(pPlanet1,&planet);
-    checkPlanet(&planet);
-    free(pPlanet1);
-}
-
-void extractPlanetData(char *pPlanet,Planets *planetStruct)
-{
-    double planetTemperature;
-    bool presenceOfWater;
-    bool survivableSurface;
-    double circularOrbits;
-    char *pPlanetArray;
-    if((pPlanetArray = calloc(4,sizeof(char))) == NULL)
-    {
-        printf("Not allocated.");
-        exit(-1);
-    }
-    for(int i = 0;i < 4;i++)
-    {
-        pPlanetArray[i] = (char) strtok(pPlanet, " ");
-        printf("%c", pPlanet[i]);
-    }
-
-    free(pPlanet);
-
-    /*planet.planetTemperature = planetTemperature;
-    if(presenceOfWater == 'true')
+    char aTemp[15];
+    char aWater[15];
+    char aSurface[15];
+    char aOrbit[15];
+    scanf("%s %s %s %s", aTemp, aWater, aSurface, aOrbit);
+    planet.planetTemperature = strtod(aTemp, NULL);
+    if(aWater[0] == 't')
     {
         planet.presenceOfWater = 1;
     }
     else
         planet.presenceOfWater = 0;
-    if (survivableSurface == 'true')
+    if(aSurface[0] == 't')
     {
         planet.survivableSurface = 1;
     }
     else
         planet.survivableSurface = 0;
-    planet.circularOrbits = circularOrbits;*/
+    planet.circularOrbits = atof(aOrbit);
+    checkPlanet(&planet);
 }
