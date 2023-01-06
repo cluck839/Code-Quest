@@ -1,3 +1,7 @@
+/*
+    Written by.: Christopher Luck
+    Purpose....: Problem 9 Half and Double problem solution
+*/
 #include <stdio.h>
 
 void findTheMultiple(int, int);
